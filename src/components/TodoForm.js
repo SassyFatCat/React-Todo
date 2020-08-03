@@ -27,12 +27,13 @@ onSubmit = event => {
 render() {
     return (
         <div>
-                <input
+            <input
                 type='text'
                 onChange={this.onChange}
                 value={this.state.form}
-                ></input>
-                <button onClick={this.onSubmit}>Add</button>
+            ></input>
+            <button onClick={this.onSubmit}>Add</button>
+            <button onClick={this.props.clearCompleted}>Clear Completed</button>
         </div>
     )
 }

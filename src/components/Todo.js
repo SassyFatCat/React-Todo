@@ -9,7 +9,8 @@ onCheckboxChange = (event) => {
 render() {
     return (
         <div>
-            <span>{this.props.item}</span>
+            {this.props.completed === false && <span>{this.props.item}</span>}
+            {this.props.completed === true && <span style={{textDecorationLine: 'line-through'}}>{this.props.item}</span>}
             <input
                 type="checkbox"
                 onChange={this.onCheckboxChange}

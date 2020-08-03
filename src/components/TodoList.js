@@ -7,7 +7,7 @@ render() {
     return (
         <div>
         {this.props.todoData.map(x => {
-            return <Todo markComplete={this.props.markComplete} item={x.task} id={x.id} />
+            return <Todo markComplete={this.props.markComplete} item={x.task} completed={x.completed} id={x.id} />
         })}
         </div>
     )

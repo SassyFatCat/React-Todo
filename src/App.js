@@ -27,6 +27,12 @@ class App extends React.Component {
     })
   }
 
+  clearCompleted = () => {
+    this.setState({
+      todoData: this.state.todoData.filter(item => !item.completed)
+    })
+  }
+
   markComplete = (id, checked) => {
     this.setState({
       todoData: this.state.todoData.map(item => {
@@ -50,7 +56,7 @@ class App extends React.Component {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoForm addToList={this.addToList} />
+        <TodoForm clearCompleted={this.clearCompleted} addToList={this.addToList} />
         <TodoList markComplete={this.markComplete} todoData={this.state.todoData} />
       </div>
     );
