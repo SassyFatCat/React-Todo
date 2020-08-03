@@ -18,7 +18,10 @@ onChange = event => {
 
 onSubmit = event => {
     event.preventDefault();
-    this.props.addToList(this.state.form)
+    this.props.addToList(this.state.form);
+    this.setState({
+        form: ''
+    })
 }
 
 render() {

@@ -7,13 +7,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todoData: [
-        {
-        task: 'shopping',
-        id: Date.now(),
-        completed: false
-      }
-    ]
+      todoData: []
     }
   }
 
@@ -33,12 +27,31 @@ class App extends React.Component {
     })
   }
 
+  markComplete = (id, checked) => {
+    this.setState({
+      todoData: this.state.todoData.map(item => {
+        if (item.id === id) {
+          console.log('worked');
+          return {
+            ...item,
+            completed: checked
+          }
+        }
+
+        else {
+          console.log('else statement')
+          return item;
+        }
+      })
+    })
+  }
+
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoForm addToList={this.addToList} />
-        <TodoList todoData={this.state.todoData} />
+        <TodoList markComplete={this.markComplete} todoData={this.state.todoData} />
       </div>
     );
   }
