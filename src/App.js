@@ -25,10 +25,17 @@ class App extends React.Component {
         ...this.state.todoData,
         newTask
       ]
-    })
+    });
+
+    /// adding to local storage ///
+    localStorage.setItem(`${newTask.id.toString(10)}`, `${task}`)
+    console.log(localStorage)
   }
 
   clearCompleted = () => {
+    /// clearing from local storage ///
+    this.state.todoData.forEach(item => item.completed ? localStorage.removeItem(`${item.id}`) : null)
+    console.log(localStorage)
     this.setState({
       todoData: this.state.todoData.filter(item => !item.completed)
     })
@@ -45,7 +52,6 @@ class App extends React.Component {
     this.setState({
       todoData: this.state.todoData.map(item => {
         if (item.id === id) {
-          console.log('worked');
           return {
             ...item,
             completed: checked
@@ -53,7 +59,6 @@ class App extends React.Component {
         }
 
         else {
-          console.log('else statement')
           return item;
         }
       })
