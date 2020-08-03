@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
+import Search from './components/Search'
 
 class App extends React.Component {
 /////////// STATE ///////////
@@ -33,6 +34,13 @@ class App extends React.Component {
     })
   }
 
+  search = term => {
+    const regex = new RegExp(`${term}`, 'ig');
+    this.setState({
+      todoData: this.state.todoData.filter(item => regex.test(item.task))
+    })
+  }
+
   markComplete = (id, checked) => {
     this.setState({
       todoData: this.state.todoData.map(item => {
@@ -57,6 +65,7 @@ class App extends React.Component {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoForm clearCompleted={this.clearCompleted} addToList={this.addToList} />
+        <Search search={this.search}/>
         <TodoList markComplete={this.markComplete} todoData={this.state.todoData} />
       </div>
     );
