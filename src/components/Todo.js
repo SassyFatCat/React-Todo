@@ -1,19 +1,9 @@
 import React from 'react';
 
 class Todo extends React.Component {
-constructor() {
-    super();
-    this.state = {
-        checked: false
-    }
-}
-
+/////////// HANDLER FUNCTIONS ///////////
 onCheckboxChange = (event) => {
-    const checked = event.target.checked;
-    this.setState({
-        checked: checked
-    });
-    this.props.markComplete(this.props.id, this.state.checked)
+    this.props.markComplete(this.props.id, event.target.checked)
 }
 
 render() {
