@@ -32,6 +32,28 @@ class App extends React.Component {
     console.log(localStorage)
   }
 
+  /// upon checkbox change, adding to state if not already present ///
+  checkboxAdd = (task, id) => {
+      const newTask = {
+        task: task,
+        id: id,
+        completed: true
+      };
+
+      if (this.state.todoData.filter(item => item.id == id).length < 1) {
+        console.log('working');
+        this.setState({
+          todoData: [
+            ...this.state.todoData,
+            newTask
+          ]
+        })
+      }
+      else {
+        console.log('not working')
+      }
+  }      
+
   clearCompleted = () => {
     /// clearing from local storage ///
     this.state.todoData.forEach(item => item.completed ? localStorage.removeItem(`${item.id}`) : null)
@@ -51,13 +73,13 @@ class App extends React.Component {
   markComplete = (id, checked) => {
     this.setState({
       todoData: this.state.todoData.map(item => {
-        if (item.id === id) {
+        if (item.id == id) {
           return {
             ...item,
             completed: checked
           }
         }
-
+        
         else {
           return item;
         }
@@ -71,7 +93,7 @@ class App extends React.Component {
         <h2>Welcome to your Todo App!</h2>
         <TodoForm clearCompleted={this.clearCompleted} addToList={this.addToList} />
         <Search search={this.search}/>
-        <TodoList markComplete={this.markComplete} todoData={this.state.todoData} />
+        <TodoList checkboxAdd={this.checkboxAdd} markComplete={this.markComplete} todoData={this.state.todoData} />
       </div>
     );
   }

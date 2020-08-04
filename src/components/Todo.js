@@ -1,16 +1,19 @@
 import React from 'react';
+import './Todo.css'
 
 class Todo extends React.Component {
 /////////// HANDLER FUNCTIONS ///////////
 onCheckboxChange = (event) => {
-    this.props.markComplete(this.props.id, event.target.checked)
+    this.props.markComplete(this.props.id, event.target.checked);
+    const itemElement = document.getElementById(this.props.id);
+    itemElement.classList.toggle('completed');
+    this.props.checkboxAdd(this.props.item, this.props.id)
 }
 
 render() {
     return (
         <div>
-            {this.props.completed === false && <span>{this.props.item}</span>}
-            {this.props.completed === true && <span style={{textDecorationLine: 'line-through'}}>{this.props.item}</span>}
+            <span id={this.props.id}>{this.props.item}</span>
             <input
                 type="checkbox"
                 onChange={this.onCheckboxChange}
