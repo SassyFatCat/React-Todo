@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todoData: []
+      todoData: [],
+      searchTerm: ''
     }
   }
 
@@ -41,7 +42,6 @@ class App extends React.Component {
       };
 
       if (this.state.todoData.filter(item => item.id == id).length < 1) {
-        console.log('working');
         this.setState({
           todoData: [
             ...this.state.todoData,
@@ -50,7 +50,7 @@ class App extends React.Component {
         })
       }
       else {
-        console.log('not working')
+        return
       }
   }      
 
@@ -64,9 +64,8 @@ class App extends React.Component {
   }
 
   search = term => {
-    const regex = new RegExp(`${term}`, 'ig');
     this.setState({
-      todoData: this.state.todoData.filter(item => regex.test(item.task))
+      searchTerm: term
     })
   }
 
@@ -92,8 +91,8 @@ class App extends React.Component {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoForm clearCompleted={this.clearCompleted} addToList={this.addToList} />
-        <Search search={this.search}/>
-        <TodoList checkboxAdd={this.checkboxAdd} markComplete={this.markComplete} todoData={this.state.todoData} />
+        <Search searchTerm={this.state.searchTerm} search={this.search}/>
+        <TodoList searchTerm={this.state.searchTerm} checkboxAdd={this.checkboxAdd} markComplete={this.markComplete} todoData={this.state.todoData} />
       </div>
     );
   }

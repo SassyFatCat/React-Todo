@@ -1,24 +1,9 @@
 import React from 'react';
 
 class Search extends React.Component {
-/////////// STATE ///////////
-constructor() {
-    super();
-    this.state = {
-        term: ''
-    }
-}
-
 /////////// HANDLER FUNCTIONS ///////////
 onChange = event => {
-    this.setState({
-        term: event.target.value
-    })
-}
-
-onSubmit = event => {
-    event.preventDefault();
-    this.props.search(this.state.term);
+    this.props.search(event.target.value)
 }
 
 render() {
@@ -26,10 +11,10 @@ render() {
         <div>
             <input
                 type='text'
+                placeholder='Search'
                 onChange={this.onChange}
-                value={this.state.term}
+                value={this.props.searchTerm}
             ></input>
-            <button onClick={this.onSubmit}>Search</button>
         </div>
     )
 }
