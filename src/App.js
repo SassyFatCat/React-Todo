@@ -2,6 +2,7 @@ import React from 'react';
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
 import Search from './components/Search'
+import './components/Stylesheets/App.css'
 
 class App extends React.Component {
 /////////// STATE ///////////
@@ -88,8 +89,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
+      <div className='App'>
+        <h2>My to-do list</h2>
         <TodoForm clearCompleted={this.clearCompleted} addToList={this.addToList} />
         <Search searchTerm={this.state.searchTerm} search={this.search}/>
         <TodoList searchTerm={this.state.searchTerm} checkboxAdd={this.checkboxAdd} markComplete={this.markComplete} todoData={this.state.todoData} />
